@@ -2468,7 +2468,6 @@ public:
             "get_mb_controller() not supported on this device!");
     }
 
-private:
     device::sptr _dev;
     property_tree::sptr _tree;
 
@@ -2766,4 +2765,10 @@ multi_usrp::sptr multi_usrp::make(const device_addr_t& dev_addr)
         return rfnoc::detail::make_rfnoc_device(rfnoc_dev, dev_addr);
     }
     return std::make_shared<multi_usrp_impl>(dev);
+}
+
+bool uhd::usrp::multi_usrp::check_link_rate(const stream_args_t& args, bool is_tx)
+{
+    device::sptr dev = get_device();
+    return std::make_shared<multi_usrp_impl>(dev)->_check_link_rate(args, is_tx);
 }

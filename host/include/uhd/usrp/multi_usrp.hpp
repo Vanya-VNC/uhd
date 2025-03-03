@@ -2006,6 +2006,11 @@ public:
      * \throws uhd::not_implemented_error if not on an RFNoC device.
      */
     virtual uhd::rfnoc::mb_controller& get_mb_controller(const size_t mboard = 0) = 0;
+
+    //! \param is_tx True for tx
+    // Assumption is that all mboards use the same link
+    // and that the rate sum is evenly distributed among the mboards
+    virtual bool check_link_rate(const stream_args_t& args, bool is_tx);
 };
 
 }} // namespace uhd::usrp
